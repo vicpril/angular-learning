@@ -1,5 +1,5 @@
 import { ServerResolver } from "./servers/server/server-resolver.service";
-import { Router, RouterModule } from "@angular/router";
+import { Router, RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
 import { HomeComponent } from "./home/home.component";
