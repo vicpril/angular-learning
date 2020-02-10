@@ -1,9 +1,11 @@
 <div class="row">
     <div class="col-12">
-        <img [src]="recipe.imagePath"
+        <img
+            [src]="recipe.imagePath"
             alt="{{ recipe.name }}"
             class="img-response"
-            style="max-height: 300px;">
+            style="max-height: 300px;"
+        />
     </div>
 </div>
 <div class="row">
@@ -16,22 +18,33 @@
 <div class="row">
     <div class="col-12">
         <div class="btn-group" appDropdown>
-            <button id="dropdownId"
+            <button
+                id="dropdownId"
                 type="button"
                 class="btn btn-primary dropdown-toggle "
-                data-toggle="dropdown">
+                data-toggle="dropdown"
+            >
                 Manage Recipe
             </button>
-            <ul
-                class="dropdown-menu">
+            <ul class="dropdown-menu">
                 <li>
-                    <a (click)="onAddToShoppingList()"
-                        class="dropdown-item" href="#">to Shopping
-                        List</a>
+                    <a
+                        style="cursor: pointer;"
+                        (click)="onAddToShoppingList()"
+                        class="dropdown-item"
+                        >to Shopping List</a
+                    >
 
-                    <a class="dropdown-item" href="#">Edit Recipe</a>
-                    <a class="dropdown-item" href="#">Delete
-                        Recipe</a></li>
+                    <a
+                        style="cursor: pointer;"
+                        class="dropdown-item"
+                        (click)="onEditRecipe()"
+                        >Edit Recipe</a
+                    >
+                    <a style="cursor: pointer;" class="dropdown-item"
+                        >Delete Recipe</a
+                    >
+                </li>
             </ul>
         </div>
     </div>
@@ -44,8 +57,10 @@
 <div class="row">
     <div class="col-12">
         <ul class="list-group">
-            <li class="list-group-item"
-                *ngFor="let ingredient of recipe.ingredients">
+            <li
+                class="list-group-item"
+                *ngFor="let ingredient of recipe.ingredients"
+            >
                 {{ ingredient.name }} - {{ ingredient.amount }}
             </li>
         </ul>
