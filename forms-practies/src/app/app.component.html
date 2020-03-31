@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row">
+        <div
+            class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"
+        >
+            <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="project">Project Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="project"
+                        id="project"
+                        formControlName="project"
+                        [class.is-valid]="
+                            projectForm.get('project').valid &&
+                            projectForm.get('project').touched
+                        "
+                        [class.is-invalid]="
+                            !projectForm.get('project').valid &&
+                            !projectForm.get('project').pending &&
+                            projectForm.get('project').touched
+                        "
+                    />
+                    <div class="invalid-feedback">
+                        <span
+                            *ngIf="
+                                projectForm.get('project').errors &&
+                                projectForm.get('project').errors[
+                                    'nameIsForbidden'
+                                ]
+                            "
+                            >Enter a valid project name!</span
+                        >
+                        <span
+                            *ngIf="
+                                projectForm.get('project').errors &&
+                                projectForm.get('project').errors['required']
+                            "
+                            >Project name is required!</span
+                        >
+                    </div>
+                </div>
+                <!-- TODO: This is for server side, there is another version for browser defaults -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="email"
+                        aria-describedby="emailHelpId"
+                        placeholder=""
+                        formControlName="email"
+                        [class.is-valid]="
+                            projectForm.get('email').valid &&
+                            projectForm.get('email').touched
+                        "
+                        [class.is-invalid]="
+                            !projectForm.get('email').valid &&
+                            projectForm.get('email').touched
+                        "
+                    />
+                    <div class="invalid-feedback">
+                        Enter a valid email!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="status">Project Status</label>
+                    <select
+                        class="form-control"
+                        name="status"
+                        id="status"
+                        formControlName="status"
+                    >
+                        <option
+                            *ngFor="let status of statuses"
+                            [value]="status"
+                            >{{ status }}</option
+                        >
+                    </select>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!projectForm.valid"
+                >
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
