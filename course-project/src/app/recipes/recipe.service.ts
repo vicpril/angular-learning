@@ -3,9 +3,12 @@ import { Recipe } from "./recipe.module";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { Subject } from "rxjs";
 
 @Injectable()
 export class RecipeService {
+    recipesChange = new Subject<Recipe[]>();
+
     private recipes: Recipe[] = [
         new Recipe(
             "Tasty Schnitzel",
@@ -38,7 +41,22 @@ export class RecipeService {
         this.router.navigate(["/recipes"]);
     }
 
+    addRecipe(recipe: Recipe) {
+        this.recipes.push(recipe);
+        this.recipesChange.next(this.recipes.slice());
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe;
+        this.recipesChange.next(this.recipes.slice());
+    }
+
     addIngredientsToShopppingList(ingredients: Ingredient[]) {
         this.slService.addIngredients(ingredients);
+    }
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+        this.recipesChange.next(this.recipes.slice());
     }
 }
